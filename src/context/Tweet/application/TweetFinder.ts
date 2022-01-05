@@ -1,6 +1,7 @@
 import { QueryBuilder } from "../../Shared/domain/queryBuilder.interface";
 import { TweetRepository } from "../domain/interfaces/TweetRepository.interface";
 import { Tweet } from "../domain/Tweet.model";
+import { TweetQuery } from "../domain/TweetQuey";
 
 export class TweetFinder {
   constructor(
@@ -9,16 +10,16 @@ export class TweetFinder {
   ) {}
 
   public async findByQuery(
-    query: string,
+    query: TweetQuery,
     from = 0,
     size = 10,
-    sorting_by?: string,
-    order?: string
+    sorting_by: string = "createAt",
+    order: string = "desc"
   ): Promise<Tweet[]> {
-    from ?? 0;
-    size ?? 10;
-    sorting_by ?? "createAt";
-    order ?? "desc";
+    from = from ? from : 0;
+    size = size ? size : 10;
+    sorting_by = sorting_by ? sorting_by : "createAt";
+    order = order ? order : "desc";
 
     return await this.tweetRepository.findByQuery(
       this.queryBuilder.build(query),
