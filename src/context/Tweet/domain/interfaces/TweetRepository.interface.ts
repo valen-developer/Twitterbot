@@ -6,7 +6,7 @@ export abstract class TweetRepository {
     query: string,
     from: number,
     size: number,
-    sorting_by?: string,
-    order?: string
+    sorting_by: string,
+    order: string
   ): Promise<Tweet[]>;
 }

@@ -9,7 +9,11 @@ export const enviroment = {
     accessToken: process.env.TWITTER_ACCESS_TOKEN || "",
     accessTokenSecret: process.env.TWITTER_ACCESS_SECRET || "",
   },
-  elasticSearch: {
-    url: process.env.ELASTICSEARCH_URL || "",
+  db: {
+    uri: process.env.DATABASE_URI || `mongodb://localhost/twitter`,
+    db: process.env.DB || "twitter",
+    host: process.env.DATABASE_HOST || "host",
+    user: process.env.DATABASE_USER || "admin",
+    password: process.env.DATABASE_PASSWORD || "admin",
   },
 };
