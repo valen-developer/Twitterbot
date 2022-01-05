@@ -11,7 +11,5 @@ mongoConnection
     initApi();
   })
   .catch((error) => {
-    console.log("🚀 ~ file: index.ts ~ line 14 ~ error", error);
-
     console.log("Error connecting to mongoDB");
   });

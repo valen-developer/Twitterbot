@@ -10,7 +10,6 @@ export class MongoConnection {
 
   public async connect(): Promise<mongoose.Connection> {
     return new Promise((resolve, reject) => {
-      console.log(enviroment);
       this._connection = mongoose.connection;
 
       mongoose.connect(
@@ -22,13 +21,22 @@ export class MongoConnection {
             password: enviroment.db.password,
           },
         },
-        (err) => {
-          console.log(err);
+        (error) => {
+          console.log(
+            "🚀 ~ file: setUpMongoDB.ts ~ line 33 ~ MongoConnection ~ this._connection.on ~ error",
+            error
+          );
+
+          reject(error);
         }
       );
 
       this._connection.on("error", (error) => {
-        console.log(error);
+        console.log(
+          "🚀 ~ file: setUpMongoDB.ts ~ line 33 ~ MongoConnection ~ this._connection.on ~ error",
+          error
+        );
+
         reject(error);
       });
 
