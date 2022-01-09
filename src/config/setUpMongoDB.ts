@@ -5,7 +5,8 @@ export class MongoConnection {
   private _connection!: mongoose.Connection;
 
   get connection(): mongoose.Connection {
-    return (this._connection = mongoose.connection);
+    this._connection = mongoose.connection;
+    return this._connection;
   }
 
   public async connect(): Promise<mongoose.Connection> {

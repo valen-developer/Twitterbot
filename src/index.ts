@@ -1,15 +1,17 @@
-import { initApi } from "./apps/API";
-import { buildContainer } from "./config/dic/buildContainer.injection";
+import { server } from "./apps/API";
+import { Server } from "./apps/API/server";
 import { MongoConnection } from "./config/setUpMongoDB";
 
-export const container = buildContainer();
-export const mongoConnection = new MongoConnection();
+const mongoConnection = new MongoConnection();
 
-mongoConnection
-  .connect()
-  .then(() => {
-    initApi();
-  })
-  .catch((error) => {
+const initApplication = async (port?: number): Promise<Server> => {
+  await mongoConnection.connect().catch((error) => {
     console.log("Error connecting to mongoDB");
   });
+
+  server.start();
+
+  return server;
+};
+
+initApplication();
