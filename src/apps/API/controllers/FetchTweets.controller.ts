@@ -5,13 +5,15 @@ import { TweetFecher } from "../../../context/Tweet/application/TweetFecher";
 import { httpErrorHandler } from "../helpers/httpErrorHandler";
 
 import { TweetUseCases } from "../../../config/dic/tweetUseCases.injection";
-import { container } from "../../..";
+import { DIC } from "../../../config/dic/DIC";
 
 export class FetchTweetsController implements Controller {
   public async run(req: Request, res: Response): Promise<void> {
     const keyword = req.query.keyword as string;
 
     try {
+      const container = DIC.instance().container;
+
       const tweetFecher: TweetFecher = container.get(
         TweetUseCases.TweetFetcher
       );

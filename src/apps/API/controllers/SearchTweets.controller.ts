@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
-import { container } from "../../..";
+import { DIC } from "../../../config/dic/DIC";
+
 import { TweetUseCases } from "../../../config/dic/tweetUseCases.injection";
 import { MongoQueryBuilder } from "../../../context/Shared/infrastructure/MongoQueryBuilder";
 import { TweetFinder } from "../../../context/Tweet/application/TweetFinder";
@@ -40,6 +41,8 @@ export class SearchTweetsController implements Controller {
     };
 
     try {
+      const container = DIC.instance().container;
+
       const tweetFinder: TweetFinder = container.get(TweetUseCases.TweetFinder);
       const tweets = await tweetFinder.findByQuery(q, from, size, sort, order);
 
