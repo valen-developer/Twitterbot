@@ -1,16 +1,8 @@
-import request from "supertest";
-import { setAppUses } from "../../../../src/apps/API/helpers/setExpressAppUses";
-import { Server } from "../../../../src/apps/API/server";
-import { MongoConnection } from "../../../../src/config/setUpMongoDB";
 import { TweetArguments } from "../../../../src/context/Tweet/domain/Tweet.model";
 import { TweetQuery } from "../../../../src/context/Tweet/domain/TweetQuey";
+import { setSupertestApi } from "./helpers/setSupertestApi";
 
-const server = new Server(3200);
-const app = server.app;
-setAppUses(app);
-const api = request(app);
-
-const mongoConnection = new MongoConnection().connect();
+const api = setSupertestApi();
 
 describe("search Tweets", () => {
   it("should return 200", async () => {
